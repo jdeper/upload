@@ -1,6 +1,5 @@
-define(function(require, exports, module) {
-  var $ = require('$');
-
+;(function($) {
+    
   var iframeCount = 0;
 
   function Uploader(options) {
@@ -20,7 +19,8 @@ define(function(require, exports, module) {
       change: null,
       error: null,
       multiple: true,
-      success: null
+      success: null,
+      redirect: null
     };
     if (options) {
       $.extend(settings, options);
@@ -59,7 +59,7 @@ define(function(require, exports, module) {
     } else {
       this.form.append(createInputs({'_uploader_': 'iframe'}));
     }
-
+    
     var input = document.createElement('input');
     input.type = 'file';
     input.name = this.settings.name;
@@ -130,11 +130,12 @@ define(function(require, exports, module) {
   // prepare for submiting form
   Uploader.prototype.submit = function() {
     var self = this;
-    if (window.FormData && self._files) {
+
+    if (window.FormData && self._files && $.support.cors) {
       // build a FormData
       var form = new FormData(self.form.get(0));
       // use FormData to upload
-      form.append(self.settings.name, self._files);
+      form.append(self.settings.name, self._files);  
       $.ajax({
         url: self.settings.action,
         type: 'post',
@@ -143,10 +144,16 @@ define(function(require, exports, module) {
         data: form,
         context: this,
         success: self.settings.success,
-        error: self.settings.error
+        error: self.settings.error,
+        xhrFields: {
+          withCredentials: true
+        }
       });
       return this;
     } else {
+      if (this.settings.redirect) {
+        $('<input name="redirect" type="text" value=' + this.settings.redirect + ' />').appendTo(this.form);
+      }
       // iframe upload
       $('body').append(self.iframe);
       self.iframe.on('load', function() {
@@ -306,6 +313,6 @@ define(function(require, exports, module) {
     return this;
   };
   MultipleUploader.Uploader = Uploader;
-
-  module.exports = MultipleUploader;
-});
+  
+  window["Uploader"] = Uploader;
+})(jQuery);
