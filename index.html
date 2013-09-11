@@ -1,0 +1,230 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Upload by jdeper</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Upload</h1>
+        <p>iframe and html5 file uploader for php</p>
+
+        <p class="view"><a href="https://github.com/jdeper/upload">View the Project on GitHub <small>jdeper/upload</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/jdeper/upload/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jdeper/upload/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jdeper/upload">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="upload" class="anchor" href="#upload"><span class="octicon octicon-link"></span></a>Upload</h1>
+
+<hr><p>iframe and html5 uploader.</p>
+
+<h2>
+<a name="%E6%BC%94%E7%A4%BA" class="anchor" href="#%E6%BC%94%E7%A4%BA"><span class="octicon octicon-link"></span></a>演示</h2>
+
+<p>查看演示，你需要 clone 一份代码：</p>
+
+<pre><code>$ git clone git://github.com/aralejs/upload
+$ cd upload
+$ npm install
+$ node server.js
+</code></pre>
+
+<p>然后访问：http://localhost:8000/demo.html</p>
+
+<h2>
+<a name="attributes" class="anchor" href="#attributes"><span class="octicon octicon-link"></span></a>Attributes</h2>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span>
+    <span class="nx">trigger</span><span class="o">:</span> <span class="s1">'#upload-icon'</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'image'</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/upload'</span><span class="p">,</span>
+    <span class="nx">accept</span><span class="o">:</span> <span class="s1">'image/*'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="s1">'xsrf'</span><span class="o">:</span> <span class="s1">'hash'</span><span class="p">},</span>
+    <span class="nx">multiple</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+    <span class="nx">error</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+    <span class="p">},</span>
+    <span class="nx">success</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</pre></div>
+
+<h3>
+<a name="trigger-elementselector" class="anchor" href="#trigger-elementselector"><span class="octicon octicon-link"></span></a>trigger <code>element|selector</code>
+</h3>
+
+<p>trigger 唤出文件选择器，可以是：</p>
+
+<pre><code>- 选择器
+- element
+- jQuery Object
+</code></pre>
+
+<h3>
+<a name="name-string" class="anchor" href="#name-string"><span class="octicon octicon-link"></span></a>name <code>string</code>
+</h3>
+
+<p>name 即为 <code>&lt;input name="{{name}}"&gt;</code> 的值，即上传文件时对应的 name。</p>
+
+<h3>
+<a name="action-url" class="anchor" href="#action-url"><span class="octicon octicon-link"></span></a>action <code>url</code>
+</h3>
+
+<p>action 为 `</p> 的值，表单提交的地址。
+
+<h3>
+<a name="accept-string" class="anchor" href="#accept-string"><span class="octicon octicon-link"></span></a>accept <code>string</code>
+</h3>
+
+<p>支持的文件类型，比如 <code>image/\*</code> 为只上传图片类的文件。可选项。</p>
+
+<h3>
+<a name="multiple-boolean" class="anchor" href="#multiple-boolean"><span class="octicon octicon-link"></span></a>multiple <code>boolean</code>
+</h3>
+
+<p>是否支持多文件上传。默认为 false。</p>
+
+<h3>
+<a name="data-object" class="anchor" href="#data-object"><span class="octicon octicon-link"></span></a>data <code>object</code>
+</h3>
+
+<p>随表单一起要提交的数据。</p>
+
+<h3>
+<a name="error-function" class="anchor" href="#error-function"><span class="octicon octicon-link"></span></a>error <code>function</code>
+</h3>
+
+<p>上传失败的回调函数。</p>
+
+<h3>
+<a name="success-function" class="anchor" href="#success-function"><span class="octicon octicon-link"></span></a>success <code>function</code>
+</h3>
+
+<p>上传成功的回调函数。</p>
+
+<h2>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h2>
+
+<p>Chain style:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span>
+    <span class="nx">trigger</span><span class="o">:</span> <span class="s1">'#upload-icon'</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'image'</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/upload'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="s1">'xsrf'</span><span class="o">:</span> <span class="s1">'hash'</span><span class="p">}</span>
+<span class="p">}).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">}).</span><span class="nx">error</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">file</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="data-api" class="anchor" href="#data-api"><span class="octicon octicon-link"></span></a>Data API</h2>
+
+<div class="highlight highlight-html"><pre><span class="nt">&lt;a</span> <span class="na">id=</span><span class="s">"upload"</span> <span class="na">data-name=</span><span class="s">"image"</span> <span class="na">data-action=</span><span class="s">"/upload"</span> <span class="na">data-data=</span><span class="s">"a=a&amp;b=b"</span><span class="nt">&gt;</span>Upload<span class="nt">&lt;/a&gt;</span>
+<span class="nt">&lt;script&gt;</span>
+<span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span><span class="s1">'trigger'</span><span class="o">:</span> <span class="s1">'#upload'</span><span class="p">});</span>
+<span class="c1">// more friendly way</span>
+<span class="c1">// var uploader = new Uploader('#upload');</span>
+<span class="nx">uploader</span><span class="p">.</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+<span class="nt">&lt;/script&gt;</span>
+</pre></div>
+
+<h2>
+<a name="advanced" class="anchor" href="#advanced"><span class="octicon octicon-link"></span></a>Advanced</h2>
+
+<p>Demo in <strong>API</strong> section could not be controlled. When you select a file, it will
+be submitted immediately. We can broke the chain with <code>change</code>:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span>
+    <span class="nx">trigger</span><span class="o">:</span> <span class="s1">'#upload-icon'</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'image'</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/upload'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="s1">'xsrf'</span><span class="o">:</span> <span class="s1">'hash'</span><span class="p">}</span>
+<span class="p">}).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s1">'you are selecting '</span> <span class="o">+</span> <span class="nx">filename</span><span class="p">);</span>
+    <span class="c1">// Default behavior of change is</span>
+    <span class="c1">// this.submit();</span>
+<span class="p">}).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<p>Now you should handle it yourself:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">$</span><span class="p">(</span><span class="s1">'#submit'</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">uploader</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="show-progress" class="anchor" href="#show-progress"><span class="octicon octicon-link"></span></a>Show Progress</h2>
+
+<p>It is impossible to show progress, but you can make a fake prgress.</p>
+
+<div class="highlight highlight-javascript"><pre><span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span>
+    <span class="nx">trigger</span><span class="o">:</span> <span class="s1">'#upload-icon'</span><span class="p">,</span>
+    <span class="nx">name</span><span class="o">:</span> <span class="s1">'image'</span><span class="p">,</span>
+    <span class="nx">action</span><span class="o">:</span> <span class="s1">'/upload'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="s1">'xsrf'</span><span class="o">:</span> <span class="s1">'hash'</span><span class="p">}</span>
+<span class="p">}).</span><span class="nx">change</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">filename</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// before submit</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#progress'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'Uploading ...'</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">submit</span><span class="p">();</span>
+<span class="p">}).</span><span class="nx">success</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">'#progress'</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="s1">'Success'</span><span class="p">);</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="nx">response</span><span class="p">);</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="seajs-hint" class="anchor" href="#seajs-hint"><span class="octicon octicon-link"></span></a>Seajs Hint</h2>
+
+<p>Load uploader with seajs:</p>
+
+<div class="highlight highlight-javascript"><pre><span class="nx">seajs</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="s1">'upload'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">Uploader</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">uploader</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uploader</span><span class="p">({</span>
+    <span class="p">});</span>
+<span class="p">});</span>
+</pre></div>
+
+<h2>
+<a name="changelog" class="anchor" href="#changelog"><span class="octicon octicon-link"></span></a>Changelog</h2>
+
+<p><strong>2013-07-18</strong> <code>1.0.1</code></p>
+
+<ol>
+<li>Support choosing the same file for uploader</li>
+<li>Fix memory leaks for FormData</li>
+</ol><p><strong>2013-06-25</strong> <code>1.0.0</code></p>
+
+<p>Combine iframe and html5 uploader.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/jdeper">jdeper</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
