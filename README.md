@@ -1,23 +1,6 @@
-# Upload
+# How to play with!
 
 ---------------
-
-iframe and html5 uploader.
-
-
-## 演示
-
-查看演示，你需要 clone 一份代码：
-
-```
-$ git clone git://github.com/aralejs/upload
-$ cd upload
-$ npm install
-$ node server.js
-```
-
-然后访问：http://localhost:8000/demo.html
-
 
 ## Attributes
 
@@ -40,39 +23,35 @@ var uploader = new Uploader({
 
 ### trigger `element|selector`
 
-trigger 唤出文件选择器，可以是：
-
-    - 选择器
-    - element
-    - jQuery Object
+a valid jQuery selector.
 
 ### name `string`
 
-name 即为 `<input name="{{name}}">` 的值，即上传文件时对应的 name。
+a name in`<input name="{{name}}">` , which is File upload parameter name post to server side.
 
 ### action `url`
 
-action 为 `<form action="{{action}}"> 的值，表单提交的地址。
+a action destination in `<form action="{{action}}">`
 
-### accept `string`
+### accept `string` _[optional]_
 
-支持的文件类型，比如 `image/\*` 为只上传图片类的文件。可选项。
+file input accept attribute，`image/\*`
 
 ### multiple `boolean`
 
-是否支持多文件上传。默认为 false。
+Whether to support multiple file uploads. The default is false。
 
 ### data `object`
 
-随表单一起要提交的数据。
+To be submitted along with the form data.
 
 ### error `function`
 
-上传失败的回调函数。
+Upload failed callback function.
 
 ### success `function`
 
-上传成功的回调函数。
+Upload a successful callback function.
 
 
 ## Methods

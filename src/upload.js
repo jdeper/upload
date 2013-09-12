@@ -1,30 +1,37 @@
-;(function($) {
-    
+;(function($, window, document, undefined) {
+var pluginName = 'fileUploader',
+	defaults = {
+		trigger: null,
+		name: null,
+		action: null,
+		data: null,
+		accept: null,
+		change: null,
+		error: null,
+		multiple: true,
+		success: null
+	};
+$.fn[pluginName] = function ( options ) {
+    return this.each(function () {
+        if (!$.data(this, 'plugin_' + pluginName)) {
+            $.data(this, 'plugin_' + pluginName)
+            options.trigger = this;
+            new Uploader( options );
+        }
+    });
+}
+
   var iframeCount = 0;
 
   function Uploader(options) {
-    if (!(this instanceof Uploader)) {
+	if (!(this instanceof Uploader)) {
       return new Uploader(options);
     }
     if (isString(options)) {
       options = {trigger: options};
     }
 
-    var settings = {
-      trigger: null,
-      name: null,
-      action: null,
-      data: null,
-      accept: null,
-      change: null,
-      error: null,
-      multiple: true,
-      success: null,
-      redirect: null
-    };
-    if (options) {
-      $.extend(settings, options);
-    }
+    var settings = $.extend({}, defaults ,options);
     var $trigger = $(settings.trigger);
 
     settings.action = settings.action || $trigger.data('action') ||
@@ -59,7 +66,7 @@
     } else {
       this.form.append(createInputs({'_uploader_': 'iframe'}));
     }
-    
+
     var input = document.createElement('input');
     input.type = 'file';
     input.name = this.settings.name;
@@ -130,12 +137,11 @@
   // prepare for submiting form
   Uploader.prototype.submit = function() {
     var self = this;
-
     if (window.FormData && self._files && $.support.cors) {
       // build a FormData
       var form = new FormData(self.form.get(0));
       // use FormData to upload
-      form.append(self.settings.name, self._files);  
+      form.append(self.settings.name, self._files);
       $.ajax({
         url: self.settings.action,
         type: 'post',
@@ -151,9 +157,6 @@
       });
       return this;
     } else {
-      if (this.settings.redirect) {
-        $('<input name="redirect" type="text" value=' + this.settings.redirect + ' />').appendTo(this.form);
-      }
       // iframe upload
       $('body').append(self.iframe);
       self.iframe.on('load', function() {
@@ -313,6 +316,6 @@
     return this;
   };
   MultipleUploader.Uploader = Uploader;
-  
+
   window["Uploader"] = Uploader;
-})(jQuery);
+})(jQuery, window, document );
